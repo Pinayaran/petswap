@@ -1,0 +1,12 @@
+:root {
+  color: #1f2937;
+  background: #f8fafc;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+.placeholder-screen { max-width: 720px; margin: 0 auto; padding: 6rem 1.5rem; }
+.eyebrow { color: #0f766e; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+h1 { font-size: clamp(2rem, 7vw, 4rem); margin: 0.5rem 0; }
+p { line-height: 1.6; }

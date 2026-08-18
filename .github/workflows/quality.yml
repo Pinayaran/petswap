@@ -1,0 +1,80 @@
+name: Quality
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'supabase/**'
+      - 'docs/**'
+      - 'README.md'
+      - 'AGENTS.md'
+      - '.github/pull_request_template.md'
+      - '.github/workflows/quality.yml'
+  push:
+    branches: [dev]
+    paths:
+      - 'web/**'
+      - 'supabase/**'
+      - 'docs/**'
+      - 'README.md'
+      - 'AGENTS.md'
+      - '.github/pull_request_template.md'
+      - '.github/workflows/quality.yml'
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-quality:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test -- --runInBand
+      - run: npm run build
+
+  docs-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify documentation links resolve
+        shell: python
+        run: |
+          import pathlib
+          import re
+          import sys
+          import urllib.parse
+
+          root = pathlib.Path('.').resolve()
+          pattern = re.compile(r'\]\(([^)\s]+)\)')
+          failures = []
+          checked = 0
+
+          for document in sorted((root / 'docs').rglob('*.md')):
+              for raw_link in pattern.findall(document.read_text(encoding='utf-8')):
+                  if raw_link.startswith(('http://', 'https://', 'mailto:')):
+                      continue
+                  target = raw_link.split('#', 1)[0]
+                  if not target:
+                      continue
+                  resolved = (document.parent / urllib.parse.unquote(target)).resolve()
+                  checked += 1
+                  if not resolved.exists():
+                      failures.append(f'{document.relative_to(root)}: {raw_link}')
+
+          print(f'checked {checked} documentation links')
+          if failures:
+              print('Broken documentation links:')
+              print('\n'.join(failures))
+              sys.exit(1)
