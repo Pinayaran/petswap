@@ -39,10 +39,10 @@ Document facts that affect future work: agreed requirements, boundaries, trade-o
 ## Working agreement
 
 1. Take one small, testable backlog card at a time and assign it in the Google Sheet.
-2. Create a branch from `dev`; do not share a feature branch between members.
+2. Create a branch from `main`; do not share a feature branch between members.
 3. Before coding, read the relevant requirement, architecture section, and ADRs.
 4. Open a PR early when integration or design feedback is useful.
-5. Before merge, attach command output or manual-test evidence and obtain one reviewer approval.
+5. Before merge to `main`, attach command output or manual-test evidence and obtain one reviewer approval.
 6. If work changes scope, create an ADR or explicitly return it to the backlog—do not silently expand a feature.
 
 ## Definition of done

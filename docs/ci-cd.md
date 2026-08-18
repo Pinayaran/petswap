@@ -11,7 +11,11 @@ npm test -- --runInBand
 npm run build
 ```
 
-The same workflow also verifies that Markdown links under docs resolve. No pull request should merge into `dev` while this gate is failing. Tonpai owns investigating CI/environment failures; the feature author owns failures introduced by their change.
+The same workflow also verifies that Markdown links under docs resolve. No pull request should merge into `main` while this gate is failing. Tonpai owns investigating CI/environment failures; the feature author owns failures introduced by their change.
+
+## Main branch protection
+
+The protected `main` branch is the only shared integration branch. GitHub requires a pull request, one approving review, current Quality checks, and resolution of review conversations before merge. New commits dismiss earlier approvals; administrators follow the same rules. Direct pushes, force pushes, and branch deletion are blocked.
 
 ## Deployment
 

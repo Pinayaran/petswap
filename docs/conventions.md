@@ -74,11 +74,11 @@ Before non-trivial work, ask: “Will this establish a durable, non-obvious dire
 
 ## Git and pull requests
 
-- main is the release branch; dev is the integration branch. Never push directly to either.
-- Create short-lived branches from dev: feature/name, fix/name, docs/name, test/name, or chore/name.
+- main is the protected shared branch. Never push directly to it.
+- Create short-lived branches from main: feature/name, fix/name, docs/name, test/name, or chore/name.
 - Use conventional commits: feat:, fix:, docs:, test:, or chore:.
-- Rebase or merge the current dev before requesting review when the branch has been open long enough to drift.
-- Every PR targets dev, names the relevant requirement, includes test/evidence details, and needs one approval before merge.
+- Rebase or merge the current main before requesting review when the branch has been open long enough to drift.
+- Every PR targets main, names the relevant requirement, includes test/evidence details, and needs one approval before merge.
 
 ## Environment variables and secrets
 

@@ -2,6 +2,7 @@ name: Quality
 
 on:
   pull_request:
+    branches: [main]
     paths:
       - 'web/**'
       - 'supabase/**'
@@ -11,7 +12,7 @@ on:
       - '.github/pull_request_template.md'
       - '.github/workflows/quality.yml'
   push:
-    branches: [dev]
+    branches: [main]
     paths:
       - 'web/**'
       - 'supabase/**'
