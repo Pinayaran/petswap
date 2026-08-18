@@ -46,7 +46,7 @@ Before changing code, identify the relevant requirement and read only the docume
 
 ## Workflow
 
-Branch from `dev`, open PRs back to `dev`, and never push directly to `dev` or `main`. Before opening a PR that changes the web app, run from `web/`:
+Branch from `main`, open PRs back to `main`, and never push directly to `main`. Before opening a PR that changes the web app, run from `web/`:
 
 ```bash
 npm run lint

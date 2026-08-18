@@ -21,7 +21,7 @@ Open the local URL printed by Vite. Supabase is intentionally not required until
 
 ## 3. Start a small piece of work
 
-    git checkout dev
+    git checkout main
     git pull
     git checkout -b feature/short-description
 
@@ -40,6 +40,6 @@ Add manual-test evidence or screenshots when the card changes UI. Follow [testin
 
 ## 5. Open a pull request
 
-Push your branch and open a PR to dev, using the repository pull-request template. Request one squad review. Do not merge your own PR without the required approval.
+Push your branch and open a PR to main, using the repository pull-request template. Request one squad review. Do not merge your own PR without the required approval.
 
 If you are blocked, raise it in the squad DSM and update the Google Sheet card with the blocker and the next needed decision.
