@@ -1,15 +1,74 @@
-# Supabase placeholder
+# Supabase
 
-This directory is intentionally scaffolded without a database schema. See [`../docs/environments.md`](../docs/environments.md) and [ADR 0002](../docs/decisions/0002-supabase-placeholder-first.md).
+This directory is the committed Supabase contract for the MVP foundation.
 
-When backend work starts:
+## Local stack
+
+From the repository root:
 
 ```bash
-npx supabase init
 npx supabase start
+npx supabase db reset
 ```
 
-- Add reviewed SQL migrations to `migrations/`.
-- Put Edge Functions in `functions/<function-name>/`.
-- Add safe local demo data to `seed.sql` only when required.
-- Enable and test RLS in the same pull request as each exposed table.
+`db reset` rebuilds Postgres from `supabase/migrations/` and then runs `supabase/seed.sql`. The seed is safe for local/demo use and does not create auth identities or secrets.
+
+Inspect the local project in Studio:
+
+```text
+http://127.0.0.1:54323
+```
+
+## Migrations
+
+Create a migration:
+
+```bash
+npx supabase migration new short_description
+```
+
+Verify migrations locally before review:
+
+```bash
+npx supabase db reset
+```
+
+The first MVP migration creates auth-backed profiles, pets, listings, listing images, bookings, listing photo storage, RLS policies, and booking overlap enforcement. Confirmed booking dates are end-exclusive, so a booking ending on 2026-09-05 does not conflict with another starting on 2026-09-05.
+
+## Generated types
+
+After changing migrations, regenerate web database types:
+
+```bash
+cd web
+npm run supabase:types
+```
+
+Commit `web/src/shared/types/database.types.ts` with the migration that changed the schema.
+
+## Hosted project
+
+Start with one shared demo/production Supabase project. Do not invent dev/staging projects until the team has operational need and documents the split.
+
+Shared hosted project:
+
+```text
+SUPABASE_PROJECT_REF=gqtdnckwubfdghynavwg
+VITE_SUPABASE_URL=https://gqtdnckwubfdghynavwg.supabase.co
+```
+
+The browser-safe publishable key is intentionally not committed. Contributors who need the shared hosted app should be added to the Supabase project, then copy `.env.local.example` to `web/.env.local` and fill in the URL and publishable key from Supabase Project Settings. Never commit or screenshot a service-role key.
+
+To let a teammate make hosted Supabase changes, invite them to the Supabase organization/project with an appropriate developer role. GitHub access alone lets them edit migrations, but Supabase project access is required to link the CLI and push reviewed migrations.
+
+Before pushing pending local migrations to the hosted project:
+
+```bash
+npx supabase login
+npx supabase link --project-ref gqtdnckwubfdghynavwg
+npx supabase db diff --linked
+npx supabase db push --dry-run
+npx supabase db push
+```
+
+Use `db push` only for reviewed, committed migrations. Do not edit remote schema by hand in Studio except for emergency triage that is immediately captured in a migration.
