@@ -9,15 +9,26 @@ This guide gets a new contributor from zero to a safe first pull request.
 3. Read [team protocol](team-protocol.md) and find the current card in the team Google Sheet.
 4. Read [design](design.md) before changing UI, and relevant ADRs before changing a durable decision.
 
-## 2. Set up the web app
+## 2. Set up Supabase and the web app
 
-Install Node.js 20.19+ or 22.12+, then run:
+Install Node.js 20.19+ or 22.12+, Docker Desktop or another Docker-compatible runtime, and the Supabase CLI through `npx`.
+
+From the repository root:
+
+    npx supabase start
+    npx supabase db reset
+
+Copy the local API URL and anon key printed by Supabase into `web/.env.local`:
+
+    cp web/.env.example web/.env.local
+
+From `web/`, install and run the app:
 
     cd web
     npm install
     npm run dev
 
-Open the local URL printed by Vite. Supabase is intentionally not required until its schema work begins; see [environments](environments.md).
+Open the local URL printed by Vite. Supabase Studio runs at http://127.0.0.1:54323 by default; see [environments](environments.md).
 
 ## 3. Start a small piece of work
 

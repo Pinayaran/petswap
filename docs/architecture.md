@@ -46,10 +46,12 @@ Screen → feature hook → TanStack Query → feature API adapter → Supabase
 
 Supabase authorization belongs in Row Level Security (RLS), not in hidden UI controls. Browser checks improve user experience; database rules protect the data.
 
+UI components must not call `getSupabaseClient()` directly. Add feature-specific hooks and API adapters under `features/<feature>/hooks` and `features/<feature>/lib`, then export the supported surface from `features/<feature>/index.ts`.
+
 ## Scope boundaries
 
 - One account can own pets, host listings, and request bookings.
 - There are no fixed user roles, payments, messaging, identity verification, availability toggles, or ratings.
 - A confirmed booking blocks only overlapping confirmed bookings for the same listing. Back-to-back bookings are valid.
 
-See [ADR 0001](decisions/0001-web-spa-feature-architecture.md) and [ADR 0003](decisions/0003-booking-rules-and-scope.md).
+See [ADR 0001](decisions/0001-web-spa-feature-architecture.md), [ADR 0003](decisions/0003-booking-rules-and-scope.md), and [ADR 0004](decisions/0004-supabase-mvp-foundation.md).

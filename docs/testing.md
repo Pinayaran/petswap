@@ -32,4 +32,19 @@ The CI gate runs lint, typecheck, Jest, and production build for every relevant 
 
 `isValidBookingTransition()` must cover every allowed transition and reject invalid transitions.
 
-Database-level overlap and RLS tests are added when the real Supabase migration is introduced.
+## Database and RLS verification
+
+For schema or policy changes, run from the repository root:
+
+```bash
+npx supabase db reset
+```
+
+Then inspect the local database in Studio at `http://127.0.0.1:54323` and verify the actor cases listed in [environments](environments.md). The baseline SQL contract checks live in `supabase/tests/database_contract.sql`; use them as review prompts until automated authenticated database tests are added.
+
+The booking overlap rule must be verified at both levels:
+
+- Jest covers the TypeScript end-exclusive conflict helper.
+- Postgres enforces `bookings_no_confirmed_overlap` for confirmed bookings on the same listing.
+
+Playwright booking flow remains skipped until auth-backed screens and deterministic Supabase test users exist. When those arrive, unskip `web/e2e/booking-flow.spec.ts` and run it against the local Supabase stack.
