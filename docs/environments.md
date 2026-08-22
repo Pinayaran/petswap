@@ -13,6 +13,38 @@ A separate dev or staging project can be added later only when the team document
 
 Local development uses the committed `supabase/config.toml`, timestamped migrations, and `supabase/seed.sql`.
 
+## Deployed web environments
+
+The Vite SPA is hosted on Cloudflare Workers static assets. See [CI/CD](ci-cd.md) for the pipeline, project configuration, and rollback procedure.
+
+| Environment | URL | Deployed from |
+| --- | --- | --- |
+| Production | `https://petswap-web.zianporrutai.workers.dev` | every push to protected `main` |
+| Branch preview | `https://<branch>-petswap-web.zianporrutai.workers.dev` | every push to that branch |
+| Version preview | `https://<version-id>-petswap-web.zianporrutai.workers.dev` | one specific build |
+
+Branch names are slugified, so `chore/cloudflare-setup` becomes `chore-cloudflare-setup`. The branch alias is stable for the life of the branch and is the URL to share for review; the version URL changes with every build and is useful for pointing at one exact version. Deleting a branch removes its preview.
+
+Because the team runs one shared Supabase project, preview deployments read and write the same data as production. Anything created while reviewing a preview is real. This is accepted while the app is a demo and should be revisited alongside any decision to add a separate dev or staging project.
+
+## Auth redirect configuration
+
+Supabase must allow every deployed host to receive an auth redirect, or Google sign-in fails on previews while still working in production. Authentication then URL Configuration carries:
+
+```text
+Site URL
+https://petswap-web.zianporrutai.workers.dev
+
+Redirect URLs
+https://petswap-web.zianporrutai.workers.dev/**
+https://*-petswap-web.zianporrutai.workers.dev/**
+http://localhost:5173/**
+```
+
+Supabase treats only `.` and `/` as separators, so the single `*` matches both a version id and a slugified branch name without reaching another host. Google Cloud Console needs no per-preview change, because its only authorised redirect URI is the Supabase callback.
+
+Attaching a custom domain later means updating the Site URL, the production entry in Redirect URLs, and the Google OAuth authorised domains to match. The workers.dev URL keeps working alongside a custom domain.
+
 ## Local setup
 
 Prerequisites:
