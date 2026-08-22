@@ -11,7 +11,19 @@ npm install
 npm run dev
 ```
 
-Copy `.env.example` to `.env.local` when Supabase integration begins. The app intentionally has no live Supabase calls yet.
+Start Supabase from the repository root first when you need live data:
+
+```bash
+npx supabase start
+```
+
+Copy `.env.example` to `.env.local`, then paste the local anon key printed by Supabase into `VITE_SUPABASE_PUBLISHABLE_KEY`. Do not use a service-role key in Vite.
+
+Regenerate database types after migration changes:
+
+```bash
+npm run supabase:types
+```
 
 ## Quality checks
 
