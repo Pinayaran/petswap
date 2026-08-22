@@ -84,7 +84,6 @@ jobs:
   supabase-migration:
     name: Supabase DB Push
     runs-on: ubuntu-latest
-    needs: test
     if: github.event_name == 'push'
     
     steps:
