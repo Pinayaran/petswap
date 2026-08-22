@@ -1,8 +1,11 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import type { Database } from '@/shared/types/database.types';
 
-let client: SupabaseClient | undefined;
+export type AppSupabaseClient = SupabaseClient<Database>;
 
-export function getSupabaseClient(): SupabaseClient {
+let client: AppSupabaseClient | undefined;
+
+export function getSupabaseClient(): AppSupabaseClient {
   const url = import.meta.env.VITE_SUPABASE_URL;
   const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
@@ -10,6 +13,6 @@ export function getSupabaseClient(): SupabaseClient {
     throw new Error('Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY before using Supabase.');
   }
 
-  client ??= createClient(url, publishableKey);
+  client ??= createClient<Database>(url, publishableKey);
   return client;
 }
