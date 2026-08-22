@@ -5,6 +5,7 @@ import { ListingsScreen } from '@/features/listings';
 import { PetsScreen } from '@/features/pets';
 import { ProfileScreen } from '@/features/profiles';
 import { SearchScreen } from '@/features/search';
+import { NotFoundScreen } from '@/shared/components/NotFoundScreen';
 
 export const router = createBrowserRouter([
   { path: '/', Component: SearchScreen },
@@ -13,4 +14,5 @@ export const router = createBrowserRouter([
   { path: '/pets', Component: PetsScreen },
   { path: '/listings', Component: ListingsScreen },
   { path: '/bookings', Component: BookingsScreen },
+  { path: '*', Component: NotFoundScreen },
 ]);
