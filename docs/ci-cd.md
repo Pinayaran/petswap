@@ -44,6 +44,8 @@ Both build variables are public values that Vite inlines into the browser bundle
 
 Node is pinned by `web/.nvmrc` so the Cloudflare build uses the same runtime the team develops against.
 
+Build watch paths are set to `web/*`, so a change confined to `docs/` or `supabase/` does not rebuild the web app. Cloudflare bypasses watch paths and builds regardless when a push carries no changes, more than 3,000 changed files, or 20 or more commits, so an occasional unnecessary build is expected rather than a sign of misconfiguration.
+
 ### Ownership and access
 
 The Platform Account Owner holds the Cloudflare account, the build API token, and the build variables, and is the person to ask for hosting configuration changes. Recovery codes and tokens live in the team password manager and never in this repository.
