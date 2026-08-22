@@ -44,7 +44,7 @@ Both build variables are public values that Vite inlines into the browser bundle
 
 Node is pinned by `web/.nvmrc` so the Cloudflare build uses the same runtime the team develops against.
 
-Build watch paths are set to `web/*`, so a change confined to `docs/` or `supabase/` does not rebuild the web app. Cloudflare bypasses watch paths and builds regardless when a push carries no changes, more than 3,000 changed files, or 20 or more commits, so an occasional unnecessary build is expected rather than a sign of misconfiguration.
+Build watch paths are set to `web/*`, intended to stop a change confined to `docs/` or `supabase/` from rebuilding the web app. As of 22 August 2026 this does not take effect: documentation-only pushes still trigger a build. The setting is left in place, but assume every push builds until someone establishes why. The only cost is wasted build minutes, and no deployment behaviour depends on it.
 
 ### Ownership and access
 
