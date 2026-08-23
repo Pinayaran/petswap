@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "supabase:types": "supabase gen types typescript --local --schema public > src/shared/types/database.types.ts",
     "test": "jest",
     "test:e2e": "playwright test"
   },
@@ -35,6 +36,7 @@
     "ts-jest": "^29.4.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.32.0",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "wrangler": "^4.125.0"
   }
 }

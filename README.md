@@ -8,7 +8,7 @@ A React web marketplace for pet owners and in-home pet sitters. A user can manag
 | --- | --- |
 | [`web/`](web/README.md) | Vite + React + TypeScript single-page app. |
 | [`docs/`](docs/architecture.md) | Current product, architecture, quality, and team-working documentation. |
-| [`supabase/`](supabase/README.md) | Supabase configuration and future migrations/functions. No schema is committed yet. |
+| [`supabase/`](supabase/README.md) | Supabase configuration, migrations, safe seed data, and local database verification. |
 | [`scripts/`](scripts/README.md) | Repeatable project setup and maintenance helpers. |
 
 ## Start here
