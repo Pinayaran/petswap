@@ -4,10 +4,10 @@
 
 | Squad | Members | Responsibilities |
 | --- | --- | --- |
-| A — Accounts & Pets | Pin, Liger, Search | Auth/profiles; pet database/API and care information; profile/pet UI, validation, squad testing. Owns FR-1.1, FR-1.2, FR-2.1, FR-2.2. |
+| A — Accounts & Pets | Pinn, Liger, Search | Auth/profiles; pet database/API and care information; profile/pet UI, validation, squad testing. Owns FR-1.1, FR-1.2, FR-2.1, FR-2.2. |
 | B — Listings & Search | Zian, Ice, Ooh | Listing database/API and permissions; creation/detail UI; search/filter UI and manual evidence. Owns FR-3.1, FR-3.2, FR-4.1, FR-4.2. |
-| C — Booking | Boeing, Time, Pipe | Booking schema/API/lifecycle; booking UI; conflict logic, Jest, and Playwright integration. Owns FR-5.1–FR-5.4. |
-| QA / Scrum / Infra | Tonpai | Docker/local setup, deployment readiness, burndown support, QA templates, and regression testing. |
+| C — Booking Management | Boeing, Tham, Pipe | Booking schema/API/lifecycle; booking UI; conflict logic, Jest, and Playwright integration. Owns FR-5.1–FR-5.4. |
+| QA / Scrum / Infra (Quality, Testing & Release) | Tonpai | Docker/local setup, deployment readiness, burndown support, QA templates, and regression testing. |
 
 Each squad appoints a mini Scrum Master, rotating if the squad prefers. The mini Scrum Master keeps the squad's Google Sheet cards current and escalates blockers.
 
