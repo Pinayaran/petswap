@@ -7,6 +7,7 @@ export type Database = {
         Row: {
           id: string;
           display_name: string;
+          username: string;
           photo_url: string | null;
           phone_number: string | null;
           location: string | null;
@@ -16,6 +17,7 @@ export type Database = {
         Insert: {
           id: string;
           display_name: string;
+          username: string;
           photo_url?: string | null;
           phone_number?: string | null;
           location?: string | null;
@@ -25,6 +27,7 @@ export type Database = {
         Update: {
           id?: string;
           display_name?: string;
+          username?: string;
           photo_url?: string | null;
           phone_number?: string | null;
           location?: string | null;
@@ -38,17 +41,17 @@ export type Database = {
           id: string;
           owner_id: string;
           name: string;
-          species: string;
+          species: Database['public']['Enums']['pet_species'];
           breed: string | null;
-          age_years: number | null;
+          age_year: number | null;
           photo_url: string | null;
           description: string | null;
-          feeding_instructions: string | null;
-          medical_notes: string | null;
-          behavior_notes: string | null;
+          feeding_instruction: string | null;
+          medical_note: string | null;
+          behavior_note: string | null;
           allergies: string | null;
           vaccination_info: string | null;
-          special_requirements: string | null;
+          special_requirement: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -56,17 +59,17 @@ export type Database = {
           id?: string;
           owner_id: string;
           name: string;
-          species: string;
+          species: Database['public']['Enums']['pet_species'];
           breed?: string | null;
-          age_years?: number | null;
+          age_year?: number | null;
           photo_url?: string | null;
           description?: string | null;
-          feeding_instructions?: string | null;
-          medical_notes?: string | null;
-          behavior_notes?: string | null;
+          feeding_instruction?: string | null;
+          medical_note?: string | null;
+          behavior_note?: string | null;
           allergies?: string | null;
           vaccination_info?: string | null;
-          special_requirements?: string | null;
+          special_requirement?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -230,6 +233,7 @@ export type Database = {
     Enums: {
       booking_status: 'pending' | 'confirmed' | 'declined' | 'cancelled' | 'completed';
       listing_status: 'draft' | 'published' | 'deleted';
+      pet_species: 'dog' | 'cat' | 'rabbit' | 'hamster' | 'guinea_pig' | 'fish' | 'reptile' | 'exotic_mammal' | 'bird' | 'other';
     };
     CompositeTypes: Record<string, never>;
   };
